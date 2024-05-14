@@ -14,7 +14,7 @@ project(
 include(GNUInstallDirs)
 
 # Handle user options.
-OPTION(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
+option(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
 
 if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
   message(STATUS "Setting build type to 'Release' as none was specified.")
@@ -32,7 +32,7 @@ if(BUILD_TESTING)
 endif()
 
 # Generate docs if desired.
-IF(ENABLE_DOCS)
-  FIND_PACKAGE(Doxygen REQUIRED)
-ENDIF()
-ADD_SUBDIRECTORY(docs)  
+if(ENABLE_DOCS)
+  find_package(Doxygen REQUIRED)
+  add_subdirectory(docs)  
+endif()
