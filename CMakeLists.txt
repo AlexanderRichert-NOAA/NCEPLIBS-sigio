@@ -26,6 +26,11 @@ endif()
 
 add_subdirectory(src)
 
+include(CTest)
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()
+
 # Generate docs if desired.
 IF(ENABLE_DOCS)
   FIND_PACKAGE(Doxygen REQUIRED)
