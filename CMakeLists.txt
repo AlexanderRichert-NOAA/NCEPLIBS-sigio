@@ -14,7 +14,6 @@ project(
 include(GNUInstallDirs)
 
 # Handle user options.
-option(ENABLE_TESTS "Build pfunit tests?" OFF)
 OPTION(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
 
 if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
@@ -26,12 +25,6 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
 endif()
 
 add_subdirectory(src)
-
-if(ENABLE_TESTS)
-  find_package(PFUNIT REQUIRED)
-  enable_testing()
-  add_subdirectory(tests)
-endif()
 
 # Generate docs if desired.
 IF(ENABLE_DOCS)
