@@ -21,10 +21,6 @@ class Sigio(CMakePackage):
     version("develop", branch="develop")
     version("2.3.2", sha256="333f3cf3a97f97103cbafcafc2ad89b24faa55b1332a98adc1637855e8a5b613")
 
-    variant("pfunit", default=False, description="Use pFunit to enable unit testing")
-
-    depends_on("pfunit", when="+pfunit")
-
     def cmake_args(self):
         args = [self.define("ENABLE_TESTS", self.run_tests)]
         return args
