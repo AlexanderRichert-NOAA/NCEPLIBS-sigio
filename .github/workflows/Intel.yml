@@ -38,23 +38,6 @@ jobs:
         sudo apt-get install intel-oneapi-dev-utilities intel-oneapi-mpi-devel intel-oneapi-openmp intel-oneapi-compiler-fortran intel-oneapi-compiler-dpcpp-cpp-and-cpp-classic
         echo "source /opt/intel/oneapi/setvars.sh" >> ~/.bash_profile
 
-    - name: checkout-pfunit
-      uses: actions/checkout@v2
-      with:
-        repository: Goddard-Fortran-Ecosystem/pFUnit
-        path: pfunit
-        submodules: true
-
-    - name: build-pfunit
-      if: steps.cache-pfunit.outputs.cache-hit != 'true'
-      run: |
-        cd pfunit
-        mkdir build
-        cd build
-        CC=icc FC=ifort cmake .. -DSKIP_MPI=YES -DSKIP_ESMF=YES -DSKIP_FHAMCREST=YES -DCMAKE_INSTALL_PREFIX=~/pfunit
-        make -j2
-        make install
-
     - name: checkout
       uses: actions/checkout@v2
       with: 
@@ -64,7 +47,7 @@ jobs:
       run: |
         cd sigio
         mkdir build && cd build
-        ${{ matrix.compilers }} cmake .. -DENABLE_TESTS=ON -DCMAKE_PREFIX_PATH="~/pfunit"
+        ${{ matrix.compilers }} cmake .. -DENABLE_TESTS=ON
         make -j2 VERBOSE=1
 
     - name: test-sigio

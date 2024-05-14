@@ -38,7 +38,7 @@ jobs:
         spack env activate sigio-env
         cp $GITHUB_WORKSPACE/sigio/spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/sigio/package.py
         spack develop --no-clone --path $GITHUB_WORKSPACE/sigio sigio@develop
-        spack add sigio@develop%gcc@11 +pfunit
+        spack add sigio@develop%gcc@11
         spack external find cmake gmake m4 python
         spack concretize
         # Run installation and run pFunit testing
