@@ -21,7 +21,7 @@ jobs:
     - name: build
       run: |
         cmake -S sigio -B sigio/build -DENABLE_DOCS=ON
-        cmake sigio/build --parallel 2 --verbose
+        cmake --build sigio/build --parallel 2 --verbose
     
     - name: test
       run: ctest --test-dir sigio/build --output-on-failure
