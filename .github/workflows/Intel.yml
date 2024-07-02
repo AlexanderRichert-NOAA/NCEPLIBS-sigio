@@ -17,26 +17,25 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        compilers: ["CC=icc FC=ifort", "CC=icx FC=ifx"]
+        compilers: ["oneapi", "classic"]
 
     steps:
 
     - name: "Install Intel"
       uses: NOAA-EMC/ci-install-intel-toolkit@develop
+      with:
+        compiler-setup: ${{ matrix.compilers }}
 
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         path: sigio
 
     - name: build
       run: |
-        cd sigio
-        mkdir build && cd build
-        ${{ matrix.compilers }} cmake .. -DENABLE_TESTS=ON
-        make -j2 VERBOSE=1
+        cmake -S sigio -B sigio/build
+        cmake --build sigio/build --parallel 2 --verbose
 
     - name: test-sigio
       run: |
-        cd sigio/build
-        ctest --verbose --output-on-failure --rerun-failed
+        ctest --test-dir sigio/build --verbose --output-on-failure --rerun-failed
