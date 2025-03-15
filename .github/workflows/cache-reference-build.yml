@@ -17,6 +17,7 @@ jobs:
     - name: Generate reference build
       shell: bash
       run: |
+        cd codedir
         git ls-files | while read -r file; do
           # Skip files in the build directory
           if [[ "$file" != "${{ inputs.build-dir }}/"* && -f "$file" ]]; then
@@ -27,10 +28,12 @@ jobs:
           fi
         done
         cmake -S codedir -B build
-#
-#     - name: Cache save
-#       uses: actions/cache/save@v4
-#       with:
-#         path: |
-#           build/
-#           reference-manifest.txt
+        echo "DEVELOP_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
+     - name: Cache save
+       uses: actions/cache/save@v4
+       with:
+         path: |
+           build/
+           reference-manifest.txt
+         key: cmake-build-cache-AlexanderRichert-NOAA-${{ env.DEVELOP_HASH }}
