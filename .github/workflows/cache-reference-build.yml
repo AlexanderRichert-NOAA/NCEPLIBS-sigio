@@ -1,7 +1,8 @@
 name: Cache reference build from merged commit on develop
 on:
   merge:
-  - develop
+    branches:
+    - develop
 
 jobs:
   cache-reference-build:
