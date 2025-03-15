@@ -1,0 +1,35 @@
+name: Cache reference build from merged commit on develop
+on:
+  merge:
+  - develop
+
+jobs:
+  cache-reference-build:
+    runs-on: ubuntu-24.04
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        path: codedir
+
+    - name: Generate reference build
+      shell: bash
+      run: |
+        git ls-files | while read -r file; do
+          # Skip files in the build directory
+          if [[ "$file" != "${{ inputs.build-dir }}/"* && -f "$file" ]]; then
+            # Calculate file hash
+            file_hash=$(git hash-object "$file")
+            # Store in manifest with pipe separator
+            echo "$file|$file_hash" >> reference-manifest.txt
+          fi
+        done
+        cmake -S codedir -B build
+
+     - name: Cache save
+       uses: actions/cache/save@v4
+       with:
+         path: |
+           build/
+           reference-manifest.txt
