@@ -14,19 +14,19 @@ jobs:
       with:
         path: codedir
 
-#    - name: Generate reference build
-#      shell: bash
-#      run: |
-#        git ls-files | while read -r file; do
-#          # Skip files in the build directory
-#          if [[ "$file" != "${{ inputs.build-dir }}/"* && -f "$file" ]]; then
-#            # Calculate file hash
-#            file_hash=$(git hash-object "$file")
-#            # Store in manifest with pipe separator
-#            echo "$file|$file_hash" >> reference-manifest.txt
-#          fi
-#        done
-#        cmake -S codedir -B build
+    - name: Generate reference build
+      shell: bash
+      run: |
+        git ls-files | while read -r file; do
+          # Skip files in the build directory
+          if [[ "$file" != "${{ inputs.build-dir }}/"* && -f "$file" ]]; then
+            # Calculate file hash
+            file_hash=$(git hash-object "$file")
+            # Store in manifest with pipe separator
+            echo "$file|$file_hash" >> reference-manifest.txt
+          fi
+        done
+        cmake -S codedir -B build
 #
 #     - name: Cache save
 #       uses: actions/cache/save@v4
