@@ -38,4 +38,3 @@ jobs:
           build/
           reference-manifest.txt
         key: cmake-build-cache-AlexanderRichert-NOAA-${{ env.DEVELOP_HASH }}
-        restore-keys: cmake-build-cache-AlexanderRichert-NOAA-${{ env.DEVELOP_HASH }}
