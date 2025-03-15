@@ -27,6 +27,9 @@ jobs:
 
     - name: Build
       uses: AlexanderRichert-NOAA/ci-cache-cmake-build/build-code@main
+      with:
+        source-dir: sigio
+        build-dir: build
     
     - name: test
-      run: ctest --test-dir sigio/build --output-on-failure
+      run: ctest --test-dir build --output-on-failure
