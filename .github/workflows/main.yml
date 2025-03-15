@@ -26,7 +26,7 @@ jobs:
         path: sigio
 
     - name: Build
-      uses: AlexanderRichert-NOAA/ci-cache-cmake-build/build-code@develop
+      uses: AlexanderRichert-NOAA/ci-cache-cmake-build/build-code@main
     
     - name: test
       run: ctest --test-dir sigio/build --output-on-failure
