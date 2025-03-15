@@ -18,6 +18,7 @@ jobs:
       shell: bash
       run: |
         cmake -S codedir -B build
+        cmake --build build --parallel 2
         cd codedir
         git ls-files | while read -r file; do
           # Skip files in the build directory
