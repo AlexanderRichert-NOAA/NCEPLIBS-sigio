@@ -30,7 +30,7 @@ jobs:
       with:
         parent-org: AlexanderRichert-NOAA
         source-dir: sigio
-        build-dir: build
+        build-dir: build/
     
     - name: test
       run: ctest --test-dir build --output-on-failure
