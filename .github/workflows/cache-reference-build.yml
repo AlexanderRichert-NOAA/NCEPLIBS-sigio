@@ -17,6 +17,7 @@ jobs:
     - name: Generate reference build
       shell: bash
       run: |
+        cmake -S codedir -B build
         cd codedir
         git ls-files | while read -r file; do
           # Skip files in the build directory
@@ -27,7 +28,6 @@ jobs:
             echo "$file|$file_hash" >> reference-manifest.txt
           fi
         done
-        cmake -S codedir -B build
         echo "DEVELOP_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
     - name: Cache save
