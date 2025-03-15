@@ -1,6 +1,6 @@
 name: Cache reference build from merged commit on develop
 on:
-  merge:
+  push:
     branches:
     - develop
 
