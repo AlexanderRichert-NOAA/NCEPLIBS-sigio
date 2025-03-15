@@ -25,11 +25,8 @@ jobs:
       with: 
         path: sigio
 
-    - name: build
-      run: |
-        export CC=gcc-${{ matrix.gcc-version }} ; export FC=gfortran-${{ matrix.gcc-version }}
-        cmake -S sigio -B sigio/build -DENABLE_DOCS=ON
-        cmake --build sigio/build --parallel 2 --verbose
+    - name: Build
+      uses: AlexanderRichert-NOAA/ci-cache-cmake-build/build-code@develop
     
     - name: test
       run: ctest --test-dir sigio/build --output-on-failure
