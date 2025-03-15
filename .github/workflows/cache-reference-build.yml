@@ -2,7 +2,7 @@ name: Cache reference build from merged commit on develop
 on:
   push:
     branches:
-    - develop
+      - 'develop'
 
 jobs:
   cache-reference-build:
