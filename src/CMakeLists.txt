@@ -13,7 +13,7 @@ if(${CMAKE_Fortran_COMPILER_ID} MATCHES "^(GNU)$" AND ${CMAKE_Fortran_COMPILER_V
    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -w -fallow-argument-mismatch -fallow-invalid-boz")
 endif()
 
-set(fortran_src sigio_module.f sigio_r_module.f)
+set(fortran_src sigio_module.f )
 
 set(lib_name ${PROJECT_NAME})
 set(module_dir "${CMAKE_CURRENT_BINARY_DIR}/include")
