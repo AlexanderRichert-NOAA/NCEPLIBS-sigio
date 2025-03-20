@@ -34,3 +34,4 @@ jobs:
     
     - name: test
       run: ctest --test-dir build --output-on-failure
+
