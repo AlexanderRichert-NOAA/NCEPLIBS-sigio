@@ -29,7 +29,7 @@ jobs:
             echo "$file|$file_hash" >> reference-manifest.txt
           fi
         done
-        echo "DEVELOP_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+        echo "DEVELOP_HASH=$(git rev-parse origin/develop)" >> $GITHUB_ENV
 
     - name: Cache save
       uses: actions/cache/save@v4
