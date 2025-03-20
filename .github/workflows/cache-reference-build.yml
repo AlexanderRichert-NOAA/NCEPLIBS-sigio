@@ -26,7 +26,7 @@ jobs:
             # Calculate file hash
             file_hash=$(git hash-object "$file")
             # Store in manifest with pipe separator
-            echo "$file|$file_hash" >> reference-manifest.txt
+            echo "$file|$file_hash" >> ${GITHUB_WORKSPACE}/reference-manifest.txt
           fi
         done
         echo "DEVELOP_HASH=$(git rev-parse origin/develop)" >> $GITHUB_ENV
