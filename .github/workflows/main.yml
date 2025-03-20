@@ -23,13 +23,13 @@ jobs:
     - name: checkout
       uses: actions/checkout@v4
       with: 
-        path: sigio
+        path: codedir
 
     - name: Build
       uses: AlexanderRichert-NOAA/ci-cache-cmake-build/build-code@main
       with:
         parent-org: AlexanderRichert-NOAA
-        source-dir: sigio
+        source-dir: codedir
         build-dir: build/
     
     - name: test
