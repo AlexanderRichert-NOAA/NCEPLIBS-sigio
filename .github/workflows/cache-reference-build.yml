@@ -15,26 +15,7 @@ jobs:
         path: codedir
 
     - name: Generate reference build
-      shell: bash
-      run: |
-        cmake -S codedir -B build
-        cmake --build build --parallel 2
-        cd codedir
-        git ls-files | while read -r file; do
-          # Skip files in the build directory
-          if [[ "$file" != "${{ inputs.build-dir }}/"* && -f "$file" ]]; then
-            # Calculate file hash
-            file_hash=$(git hash-object "$file")
-            # Store in manifest with pipe separator
-            echo "$file|$file_hash" >> ${GITHUB_WORKSPACE}/reference-manifest.txt
-          fi
-        done
-        echo "DEVELOP_HASH=$(git rev-parse origin/develop)" >> $GITHUB_ENV
-
-    - name: Cache save
-      uses: actions/cache/save@v4
+      uses: AlexanderRichert-NOAA/ci-cache-cmake-build/create-reference-build@main
       with:
-        path: |
-          build/
-          reference-manifest.txt
-        key: cmake-build-cache-AlexanderRichert-NOAA-${{ env.DEVELOP_HASH }}
+        source-dir: codedir
+        build-dir: build
